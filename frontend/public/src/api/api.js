@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000/api"; // Change when deploying
+const API_BASE_URL = "http://localhost:5000/api";
 
 export const api = axios.create({
   baseURL: API_BASE_URL,
@@ -9,10 +9,3 @@ export const api = axios.create({
   },
 });
 
-export const loginUser = async (email, password) => {
-  return api.post("/login", { email, password });
-};
-
-export const registerUser = async (username, email, password) => {
-  return api.post("/register", { username, email, password });
-};
