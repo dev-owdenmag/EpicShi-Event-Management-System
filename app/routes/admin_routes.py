@@ -20,5 +20,3 @@ def add_client():
     db.session.commit()
 
     return jsonify({"message": "Client created successfully"}), 201
-
-EpicShi_-Event-Management-System
