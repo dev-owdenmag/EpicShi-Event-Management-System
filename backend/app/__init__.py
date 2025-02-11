@@ -19,13 +19,13 @@ def create_app():
     from app.routes.client_routes import client_bp
     from app.routes.admin_routes import admin_bp
     from app.routes.rsvp_routes import rsvp_bp
-    from app.routes.project_routes import project_bp
+    from app.routes.projects_routes import project_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(client_bp, url_prefix="/api/client")
     app.register_blueprint(admin_bp, url_prefix="/api/admin")
     app.register_blueprint(rsvp_bp, url_prefix="/api/rsvp")
-    app.register_blueprint(project_bp, url_prefix="/api/projects")
+    app.register_blueprint(projects_bp, url_prefix="/api/projects")
 
     return app
 
