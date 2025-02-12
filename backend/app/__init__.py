@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
-from app.routes import some_routes
+from app.routes import routes
 
 
 db = SQLAlchemy()
@@ -21,7 +21,7 @@ def create_app():
     from app.routes.client_routes import client_bp
     from app.routes.admin_routes import admin_bp
     from app.routes.rsvp_routes import rsvp_bp
-    from app.routes.projects_routes import project_bp
+    from app.routes.projects_routes import projects_bp
 
     app.register_blueprint(auth_bp, url_prefix="/api/auth")
     app.register_blueprint(client_bp, url_prefix="/api/client")
@@ -31,6 +31,3 @@ def create_app():
 
     return app
 
-@app.route('/')
-def home():
-    return "Hey there!"
