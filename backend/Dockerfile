@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 5000
 
 # Set the entry point to run Gunicorn
-CMD ["gunicorn", "-c", "gunicorn_config.py", "run:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "wsgi:app"]

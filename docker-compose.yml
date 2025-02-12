@@ -4,14 +4,17 @@ services:
   backend:
     build: ./backend
     ports:
-      - "5000:5000"
+      - "5050:5000"
     depends_on:
       - db
     environment:
       FLASK_APP: run.py
       FLASK_ENV: production
-      DATABASE_URL: "mysql+pymysql://user:password@db/event_db"
+      DATABASE_URL: "mysql+pymysql://root:Commando1+@db/EpicShi_Event_Management"
     restart: always
+    command: gunicorn -w 4 -b 0.0.0.0:5000 wsgi:app  # Use Gunicorn config
+    volumes:
+      - ./backend:/app
 
   frontend:
     build: ./frontend
@@ -20,17 +23,20 @@ services:
     depends_on:
       - backend
     restart: always
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # Prevents node_modules issues inside container
 
   db:
     image: mysql:8
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: event_db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: Commando1+
+      MYSQL_DATABASE: EpicShi_Event_Management
     restart: always
+    volumes:
+      - mysql_data:/var/lib/mysql  # Ensures database persistence
 
   nginx:
     image: nginx:latest
@@ -42,3 +48,6 @@ services:
       - frontend
       - backend
     restart: always
+
+volumes:
+  mysql_data:  # Persistent volume for MySQL
